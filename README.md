@@ -1,7 +1,5 @@
 # multipad-looper
 
-# Multipad-looper
-
 The multi-pad looper is React App designed to play multiple 9 synced audio loops.
 
 ## Usage
