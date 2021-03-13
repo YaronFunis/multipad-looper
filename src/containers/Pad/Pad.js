@@ -4,10 +4,10 @@ import './Pad.css'
 const Pad = (props) => {
     //State tracking whether pad is ON/OFF
     const [isActive, setIsActive] = useState(false);
-
     return (
         <div >
             <div className="pad"
+            //returns the state of the pad for the multipad controller
                 onClick={() => {
                     setIsActive(!isActive);
                     props.toggle(!isActive);

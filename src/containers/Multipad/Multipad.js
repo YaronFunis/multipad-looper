@@ -1,49 +1,45 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Pad from '../Pad/Pad'
 import './Multipad.css';
+import playIcon from '../../assets/images/playIcon.png'
+import pauseIcon from '../../assets/images/pauseIcon.png'
 
 const Multipad = ({ pads }) => {
     const [playlist, setPlaylist] = useState([]);
-    const [tracklist, setTracklist] = useState([]);
     const [isPlaying, setIsPLaying] = useState(false);
+    //Used to track the current play interval (8 seconds)
     const [intervalId, setIntervalId] = useState('');
+    //used to track current updated playlist
     const listRef = useRef([]);
+
+    //Listens to changes in the playlist array
     useEffect(() => {
-        listRef.current = tracklist;
-    }, [tracklist])
+        listRef.current = playlist;
+    }, [playlist])
 
 
     //Updates every audio loop every 8 seconds.
     useEffect(() => {
         if (isPlaying) {
+            //Plays the waiting playlist when play button is triggered
             listRef.current.map(t => loopAudio(t));
             const interval = setInterval(() => {
-                console.table(listRef.current);
+                //Pauses all active audio first - then plays the updated playlist
                 listRef.current.map(t => pauseAudio(t));
                 listRef.current.map(t => loopAudio(t));
-                console.log("This will run every 8 second!");
             }, 8000);
+            //Tracks the current interva; (8 seconds)
             setIntervalId(interval);
-            return () => {
-                //clearInterval(interval);
-            }
         } else {
-            // pause
+            //Pauses the audio when pause button is triggered
             listRef.current.map(t => pauseAudio(t));
             clearInterval(intervalId);
         }
+        // Disable dependency warning for intervalId.
+        // eslint-disable-next-line
     }, [isPlaying]);
 
-    //updates the playlist constantly on changes in the tracklist array
-    // useEffect(() => {
-    //     tracklist.forEach((track) => {
-    //         if (!playlist.find(t => t === track)) {
-    //             setPlaylist((prevTracks) => [...prevTracks, track]);
-    //         }
-    //     });
-    // }, [tracklist, playlist])
-
-    // recieves a pad and assigning it an audio track
+    // recieves a pad and assigning it with an audio track
     const loopAudio = (track) => {
         track.audio = new Audio(track.sound);
         track.audio.loop = true;
@@ -55,19 +51,16 @@ const Multipad = ({ pads }) => {
         if (track.audio) {
             track.audio.pause();
         }
-        // setPlaylist(playlist.filter(t => t !== track))
     }
 
     // triggers the first audio loop when play button is clicked
     const togglePlay = () => {
         setIsPLaying(true);
-        //playlist.map(t => loopAudio(t))
     }
 
     // pausing all active audio tracks when pause button is clicked
     const togglePause = () => {
         console.log("paused")
-        //     tracklist.map(t => pauseAudio(t));
         setIsPLaying(false);
     }
 
@@ -75,28 +68,27 @@ const Multipad = ({ pads }) => {
     const padClickedHandler = (track) => (status) => {
         // if the pad is turned on
         if (status) {
-
-            // if the pad is not in the tracklist
-            if (!tracklist.find(t => t.id === track.id)) {
-                //assign the pad to the tracklist
-                setTracklist(prevTracks => [...prevTracks, track])
+            // if the pad is not in the playlist
+            if (!playlist.find(t => t.id === track.id)) {
+                //assign the pad to the playlist
+                setPlaylist(prevTracks => [...prevTracks, track])
             }
             // if the pad is turned off
         } else {
             // if pad is already playing
-            if (tracklist.find(t => t.id === track.id)) {
+            if (playlist.find(t => t.id === track.id)) {
                 pauseAudio(track);
             }
-            // removes pad from the tracklist
-            setTracklist(tracklist.filter(t => t.id !== track.id))
-
+            // removes pad from the playlist
+            setPlaylist(playlist.filter(t => t.id !== track.id))
         }
     }
-
     return (
         <>
-            <button className="button-play" onClick={togglePlay} disabled={isPlaying}>Play</button>
-            <button className="button-pause" onClick={togglePause} disabled={!isPlaying}>Pause</button>
+            <div className="panel">
+                <img src={playIcon} alt="play" onClick={togglePlay} hidden={isPlaying} />
+                <img src={pauseIcon} alt="pause" onClick={togglePause} hidden={!isPlaying} />
+            </div>
             <div className="controller">
                 {pads.map((pad) => {
                     return (

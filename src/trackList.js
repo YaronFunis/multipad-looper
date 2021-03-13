@@ -39,7 +39,7 @@ export const trackList = [
     }, 
     {
         id: 5,
-        name: 'Groovey Drums',
+        name: 'Groove Drums',
         sound: drums2,
         color: 'green',
         isActive: false

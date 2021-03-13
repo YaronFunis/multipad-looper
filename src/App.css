@@ -1,25 +1,22 @@
-.app {
-  text-align: center;
-  justify-content: center;
-  display:grid;
-
+@media (min-width: 500px) and (min-height: 400px) {
+  .app {
+    justify-content: center;
+    align-items: center;
+    display: grid;
+  }
 }
-
 header {
   font-family: 'Niconne', cursive;
   color: white;
-  font-size: 6vw;
-  margin-top: 2%;
-  margin-bottom: 5%;
-  display: flex;
-  align-items: center;
   justify-content: center;
+  font-size: 5vw;
+  margin-top: 5px;
+  display: flex;
 }
 
 footer {
-  font-size: 2vh;
-  position: absolute;
-  left:0;
-  bottom:0;
-  right:0;
+  font-size: 1vw;
+  color: white;
+  position: flex;
+  text-align: center;
 }
