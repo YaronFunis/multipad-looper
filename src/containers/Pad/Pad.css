@@ -1,0 +1,26 @@
+.pad {
+  background-image: url(../../assets/images/pad.jpg);
+  background-size: cover;
+  color: #AAA;
+  height: 12vw;
+  border: 2px solid black;
+}
+.color{
+  opacity: 0.9;
+  margin: 0 auto;
+  width: 30%;
+  height: 10%;
+  position: relative;
+  border: 0.3px solid slategray;
+  border-radius: 7px;
+}
+.text{
+  font-size: 1.8vw;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  margin-top: 30px;
+  font-family: 'Gruppo', cursive;
+  border-radius: 50%;
+  text-shadow: 1px 1px black;
+}

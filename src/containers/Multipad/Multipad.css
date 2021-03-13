@@ -1,0 +1,9 @@
+.controller {
+    display: grid;
+    opacity: 0.8;
+    border: 2px solid #dadada;
+    border-radius: 7px;
+    justify-content: center;
+    grid-template-rows: 33% 33% 33%;
+    grid-template-columns: 33% 33% 33%;
+}
