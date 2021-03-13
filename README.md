@@ -1,9 +1,9 @@
 # multipad-looper
 
-The multi-pad looper is React App designed to play multiple 9 synced audio loops.
+The multi-pad looper is React App designed to play multiple synced audio loops.
 
 ## Usage
-Click on each pad to trigger it on/off.
+Click on any of the 9 pads to trigger it on/off.
 
 The loop will start playing when the play button is clicked.
 
